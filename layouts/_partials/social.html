@@ -1,0 +1,5 @@
+{{- $p := hugo.Data.perfil -}}
+{{ with $p.github }}<a href="{{ . }}" rel="me noopener">GitHub</a>{{ end }}
+{{ with $p.linkedin }}<a href="{{ . }}" rel="me noopener">LinkedIn</a>{{ end }}
+{{ with $p.x }}<a href="{{ . }}" rel="me noopener">X</a>{{ end }}
+{{ with $p.email }}<a href="mailto:{{ . }}">{{ . }}</a>{{ end }}

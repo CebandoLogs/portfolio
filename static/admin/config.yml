@@ -1,0 +1,118 @@
+# Panel de administración (Sveltia CMS). Entrás en /admin/ con tu cuenta de GitHub.
+backend:
+  name: github
+  repo: CebandoLogs/portfolio
+  branch: main
+  commit_messages:
+    create: "post: crear {{slug}}"
+    update: "post: actualizar {{slug}}"
+    delete: "post: borrar {{slug}}"
+    uploadMedia: "media: subir {{path}}"
+    deleteMedia: "media: borrar {{path}}"
+
+locale: es
+media_folder: static/img/uploads
+public_folder: /img/uploads
+
+collections:
+  - name: posts
+    label: Blog
+    label_singular: Post
+    folder: content/posts
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    slug: "{{slug}}"
+    summary: "{{title}} · {{date | date('DD/MM/YYYY')}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: Título, widget: string }
+      - { name: date, label: Fecha, widget: datetime, time_format: false, format: "YYYY-MM-DD" }
+      - { name: draft, label: Borrador (no se publica), widget: boolean, default: true }
+      - { name: summary, label: Resumen, widget: text, hint: "1 o 2 oraciones. Aparece en los listados y al compartir el link." }
+      - { name: tags, label: Etiquetas, widget: list, required: false }
+      - { name: mitre, label: Técnicas MITRE ATT&CK, widget: list, required: false, hint: "Por ejemplo T1059.001. Se muestran como links a attack.mitre.org." }
+      - { name: body, label: Contenido, widget: markdown }
+
+  - name: proyectos
+    label: Proyectos
+    label_singular: Proyecto
+    folder: content/proyectos
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: Título, widget: string }
+      - { name: date, label: Fecha, widget: datetime, time_format: false, format: "YYYY-MM-DD" }
+      - { name: draft, label: Borrador (no se publica), widget: boolean, default: false }
+      - { name: summary, label: Resumen, widget: text }
+      - { name: estado, label: Estado, widget: select, options: ["En progreso", "Terminado"], default: "En progreso" }
+      - { name: destacado, label: Mostrar en la portada, widget: boolean, default: false }
+      - { name: repo, label: Link al repositorio, widget: string, required: false }
+      - { name: stack, label: Tecnologías, widget: list, required: false }
+      - { name: tags, label: Etiquetas, widget: list, required: false }
+      - { name: body, label: Contenido, widget: markdown }
+
+  - name: paginas
+    label: Páginas
+    files:
+      - name: sobre-mi
+        label: Sobre mí
+        file: content/sobre-mi.md
+        fields:
+          - { name: title, label: Título, widget: string }
+          - { name: body, label: Contenido, widget: markdown }
+
+  - name: ajustes
+    label: Ajustes del sitio
+    files:
+      - name: perfil
+        label: Perfil y redes
+        file: data/perfil.yml
+        fields:
+          - { name: nombre, label: Nombre, widget: string }
+          - { name: rol, label: Rol, widget: string }
+          - { name: bio, label: Presentación, widget: text }
+          - { name: ahora, label: Qué estás estudiando ahora, widget: string, required: false }
+          - { name: disponible, label: Mostrar que buscás trabajo, widget: boolean, default: true }
+          - { name: disponible_texto, label: Texto de disponibilidad, widget: string, required: false }
+          - { name: github, label: Link de GitHub, widget: string, required: false }
+          - { name: linkedin, label: Link de LinkedIn, widget: string, required: false }
+          - { name: x, label: Link de X, widget: string, required: false }
+          - { name: email, label: Email de contacto (queda público), widget: string, required: false }
+      - name: apariencia
+        label: Apariencia
+        file: data/apariencia.yml
+        fields:
+          - { name: acento_claro, label: Color de acento (tema claro), widget: color }
+          - { name: acento_oscuro, label: Color de acento (tema oscuro), widget: color }
+          - { name: tema_inicial, label: Tema inicial, widget: select, options: [{ label: "Según el sistema del visitante", value: auto }, { label: Claro, value: claro }, { label: Oscuro, value: oscuro }], default: auto }
+          - { name: titulos, label: Tipografía de títulos, widget: select, options: [{ label: Sans, value: sans }, { label: Monoespaciada, value: mono }, { label: Serif, value: serif }], default: sans }
+      - name: certificaciones
+        label: Certificaciones
+        file: data/certificaciones.yml
+        fields:
+          - name: certificaciones
+            label: Certificaciones
+            label_singular: Certificación
+            widget: list
+            summary: "{{nombre}} · {{estado}}"
+            fields:
+              - { name: nombre, label: Nombre, widget: string }
+              - { name: emisor, label: Emisor, widget: string }
+              - { name: estado, label: Estado, widget: select, options: [Planificada, "En curso", Obtenida] }
+              - { name: fecha, label: Fecha, widget: string, required: false, hint: "Por ejemplo: enero 2027" }
+              - { name: verificacion, label: Link de verificación, widget: string, required: false }
+      - name: stack
+        label: Con qué trabajo
+        file: data/stack.yml
+        fields:
+          - name: grupos
+            label: Grupos
+            label_singular: Grupo
+            widget: list
+            summary: "{{nombre}}"
+            fields:
+              - { name: nombre, label: Nombre del grupo, widget: string }
+              - { name: items, label: Herramientas y temas, widget: list }

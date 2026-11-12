@@ -1,0 +1,4 @@
+{{ define "main" }}
+<h1>#{{ .Title }}</h1>
+<ul class="rows">{{ range .Pages }}{{ partial "post-row.html" . }}{{ end }}</ul>
+{{ end }}

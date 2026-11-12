@@ -1,0 +1,11 @@
+{{ with hugo.Data.certificaciones.certificaciones }}
+<ul class="certs">
+  {{ range . }}
+  <li>
+    <div><strong>{{ .nombre }}</strong><span class="muted">{{ .emisor }}{{ with .fecha }} · {{ . }}{{ end }}</span></div>
+    <span class="state{{ if eq .estado "Obtenida" }} done{{ else if eq .estado "Planificada" }} idle{{ end }}">{{ .estado }}</span>
+    {{ with .verificacion }}<a href="{{ . }}" rel="noopener">Verificar →</a>{{ end }}
+  </li>
+  {{ end }}
+</ul>
+{{ end }}

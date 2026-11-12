@@ -1,0 +1,43 @@
+# ── Cebando Logs ───────────────────────────────────────────────────────
+# Lo único que hay que tocar acá es baseURL (la dirección final del sitio).
+# Todo lo demás (perfil, links, colores, certificaciones) se edita desde
+# el panel /admin o en los archivos de la carpeta data/.
+baseURL = "https://cebandologs.pages.dev/"
+locale = "es-AR"
+defaultContentLanguage = "es"
+title = "Cebando Logs"
+enableRobotsTXT = true
+summaryLength = 40
+
+[params]
+  description = "Portfolio y blog de seguridad defensiva: detección, respuesta a incidentes, home lab y análisis de logs."
+
+[menus]
+  [[menus.main]]
+    name = "Proyectos"
+    pageRef = "/proyectos"
+    weight = 10
+  [[menus.main]]
+    name = "Blog"
+    pageRef = "/posts"
+    weight = 20
+  [[menus.main]]
+    name = "Sobre mí"
+    pageRef = "/sobre-mi"
+    weight = 30
+
+[taxonomies]
+  tag = "tags"
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+  [markup.goldmark.renderer]
+    unsafe = false
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+
+[outputs]
+  home = ["html", "rss"]
+  section = ["html", "rss"]

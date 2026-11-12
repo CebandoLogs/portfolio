@@ -1,0 +1,11 @@
+grupos:
+  - nombre: Detección y SIEM
+    items: [Wazuh, Splunk (SPL), Microsoft Sentinel (KQL), Sigma, Sysmon]
+  - nombre: Redes
+    items: [Wireshark, Zeek, Suricata, OPNsense, TCP/IP]
+  - nombre: Respuesta a incidentes
+    items: [MITRE ATT&CK, NIST 800-61, Análisis de phishing, Triage de malware]
+  - nombre: Sistemas y cloud
+    items: [Active Directory, Linux, AWS GuardDuty, CloudTrail]
+  - nombre: Análisis de datos
+    items: [SQL, Investigación con datos, Documentación técnica]

@@ -1,0 +1,11 @@
+certificaciones:
+  - nombre: CompTIA Security+
+    emisor: CompTIA
+    estado: En curso
+    fecha: ""
+    verificacion: ""
+  - nombre: "SC-200: Security Operations Analyst"
+    emisor: Microsoft
+    estado: Planificada
+    fecha: ""
+    verificacion: ""

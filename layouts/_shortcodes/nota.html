@@ -1,0 +1,6 @@
+{{ $tipo := .Get 0 | default "info" }}
+{{ $titulos := dict "info" "Nota" "deteccion" "Detección" "alerta" "Atención" }}
+<aside class="nota nota-{{ $tipo }}">
+  <strong>{{ .Get 1 | default (index $titulos $tipo) | default "Nota" }}</strong>
+  {{ .Inner | .Page.RenderString (dict "display" "block") }}
+</aside>

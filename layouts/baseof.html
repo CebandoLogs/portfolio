@@ -1,0 +1,39 @@
+<!doctype html>
+{{- $perfil := hugo.Data.perfil -}}
+{{- $desc := site.Params.description -}}
+{{- if .IsPage }}{{ with .Params.summary }}{{ $desc = . }}{{ end }}{{ else if .IsHome }}{{ with $perfil.bio }}{{ $desc = . }}{{ end }}{{ end }}
+<html lang="{{ site.Language.Locale }}" data-default-theme="{{ hugo.Data.apariencia.tema_inicial | default "auto" }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{- if hugo.IsProduction }}
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'none'">
+  {{- end }}
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>{{ if .IsHome }}{{ site.Title }} · {{ $perfil.rol }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ $desc | plainify | truncate 160 }}">
+  <meta name="author" content="{{ $perfil.nombre }}">
+  <meta property="og:site_name" content="{{ site.Title }}">
+  <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}">
+  <meta property="og:description" content="{{ $desc | plainify | truncate 160 }}">
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="{{ .Permalink }}">
+  <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+  {{ with site.Home.OutputFormats.Get "rss" }}<link rel="alternate" type="application/rss+xml" href="{{ .RelPermalink }}" title="{{ site.Title }}">{{ end }}
+  {{- $theme := resources.Get "css/theme.css" | resources.ExecuteAsTemplate "css/theme.gen.css" . }}
+  {{- $css := slice (resources.Get "css/main.css") $theme (resources.Get "css/syntax.css") | resources.Concat "css/site.css" | minify | fingerprint "sha384" }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  {{- $js := resources.Get "js/theme.js" | minify | fingerprint "sha384" }}
+  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  {{ partial "header.html" . }}
+  <main class="wrap" id="contenido">
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+</body>
+</html>

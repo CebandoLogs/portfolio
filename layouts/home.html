@@ -1,0 +1,49 @@
+{{ define "main" }}
+{{ $p := hugo.Data.perfil }}
+<section class="hero">
+  <p class="label">{{ $p.rol }}</p>
+  <h1>{{ $p.nombre }}</h1>
+  <p class="bio">{{ $p.bio }}</p>
+  {{ if $p.disponible }}<p class="avail"><span class="dot" aria-hidden="true"></span>{{ $p.disponible_texto }}</p>{{ end }}
+  <p class="cta">
+    <a class="btn primary" href="{{ "proyectos/" | relURL }}">Ver proyectos</a>
+    <a class="btn" href="{{ "posts/" | relURL }}">Leer el blog</a>
+    <span class="social">{{ partial "social.html" . }}</span>
+  </p>
+  {{ with $p.ahora }}<p class="logline"><span class="lvl">INFO</span><span class="k">ahora=</span><span class="v">"{{ . }}"</span></p>{{ end }}
+</section>
+
+{{ $proyectos := where site.RegularPages "Section" "proyectos" }}
+{{ $destacados := where $proyectos "Params.destacado" true }}
+{{ with (cond (gt (len $destacados) 0) $destacados $proyectos) }}
+<section class="block">
+  <div class="block-head"><h2>Proyectos</h2><a href="{{ "proyectos/" | relURL }}">Ver todos →</a></div>
+  <div class="cards">{{ range first 4 . }}{{ partial "project-card.html" . }}{{ end }}</div>
+</section>
+{{ end }}
+
+{{ with hugo.Data.stack.grupos }}
+<section class="block">
+  <div class="block-head"><h2>Con qué trabajo</h2></div>
+  <dl class="stack-groups">
+    {{ range . }}<div><dt>{{ .nombre }}</dt><dd class="stack">{{ range .items }}<span>{{ . }}</span>{{ end }}</dd></div>{{ end }}
+  </dl>
+</section>
+{{ end }}
+
+{{ if hugo.Data.certificaciones.certificaciones }}
+<section class="block">
+  <div class="block-head"><h2>Certificaciones</h2></div>
+  {{ partial "certs.html" . }}
+</section>
+{{ end }}
+
+<section class="block">
+  <div class="block-head"><h2>Últimos posts</h2><a href="{{ "posts/" | relURL }}">Ver todos →</a></div>
+  {{ with where site.RegularPages "Section" "posts" }}
+    <ul class="rows">{{ range first 5 . }}{{ partial "post-row.html" . }}{{ end }}</ul>
+  {{ else }}
+    <p class="muted">Todavía no hay posts publicados.</p>
+  {{ end }}
+</section>
+{{ end }}
