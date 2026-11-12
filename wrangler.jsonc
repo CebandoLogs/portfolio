@@ -1,0 +1,10 @@
+// Publicación en Cloudflare Workers como sitio estático.
+// "name" tiene que coincidir con el nombre del proyecto en Cloudflare.
+{
+  "name": "portfolio",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "404-page"
+  }
+}

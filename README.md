@@ -12,7 +12,7 @@ data/perfil.yml       ← nombre, rol, presentación, links, "ahora estudiando"
 data/apariencia.yml   ← colores de acento, tema inicial, tipografía de títulos
 data/certificaciones.yml, data/stack.yml
 static/admin/         ← panel de administración (Sveltia CMS)
-static/_headers       ← cabeceras de seguridad (Cloudflare Pages)
+static/_headers       ← cabeceras de seguridad (las aplica Cloudflare)
 layouts/ assets/      ← diseño
 ```
 
@@ -22,10 +22,10 @@ Todo lo de `content/` y `data/` se edita desde el panel. No hace falta tocar arc
 
 1. **GitHub:** creá una cuenta con el usuario de la marca, activá la verificación en dos pasos y creá un repositorio (por ejemplo `cebando-logs`). Subí esta carpeta a la rama `main`.
 2. **`static/admin/config.yml`:** ya apunta a `CebandoLogs/portfolio`.
-3. **Cloudflare Pages:** creá un proyecto conectado a ese repositorio con:
-   - Build command: `hugo --gc --minify`
-   - Output directory: `public`
-   - Variable de entorno: `HUGO_VERSION` = `0.169.0`
+3. **Cloudflare:** en Workers & Pages, creá un proyecto conectado a ese repositorio con:
+   - Build command: `bash build.sh`
+   - Deploy command: `npx wrangler deploy`
+   El script `build.sh` baja una versión fija de Hugo, verifica su hash y compila. `wrangler.jsonc` le dice a Cloudflare que publique la carpeta `public`.
 4. **`hugo.toml`:** poné en `baseURL` la dirección que te dio Cloudflare (o tu dominio propio).
 
 Desde ahí, cada cambio que guardes en el panel o subas con git se publica solo en 1 o 2 minutos.
