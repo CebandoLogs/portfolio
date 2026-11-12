@@ -1,4 +1,4 @@
 {{ define "main" }}
-<h1>#{{ .Title }}</h1>
-<ul class="rows">{{ range .Pages }}{{ partial "post-row.html" . }}{{ end }}</ul>
+<header class="post-head"><h1>#{{ .Title }}</h1></header>
+<ul class="ledger posts">{{ range .Pages }}{{ partial "post-row.html" . }}{{ end }}</ul>
 {{ end }}

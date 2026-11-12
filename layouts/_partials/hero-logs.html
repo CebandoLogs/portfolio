@@ -1,0 +1,23 @@
+{{- $lines := slice
+  (dict "t" "sshd[2114]: Failed password for root from 203.0.113.57 port 51422 ssh2")
+  (dict "t" "sshd[2114]: Failed password for admin from 203.0.113.57 port 51430 ssh2")
+  (dict "t" "sshd[2114]: Failed password for ubuntu from 203.0.113.57 port 51438 ssh2")
+  (dict "t" "ALERTA T1110 fuerza bruta SSH · origen 203.0.113.57 · 48 intentos/min" "hit" true)
+  (dict "t" "Sysmon EID=3 Image=chrome.exe DestinationIp=198.51.100.20 DestinationPort=443")
+  (dict "t" "Security EID=4624 LogonType=3 TargetUserName=svc_backup SrcIp=10.0.20.14")
+  (dict "t" "suricata: ET SCAN Nmap -sS window 1024 10.0.40.5 -> 10.0.20.10")
+  (dict "t" "Sysmon EID=1 Image=powershell.exe CommandLine=\"-nop -w hidden -enc SQBFAFgA...\"")
+  (dict "t" "ALERTA T1059.001 PowerShell codificado · host WS-01 · usuario jperez" "hit" true)
+  (dict "t" "opnsense: block in on vlan40 TCP 10.0.40.5:44122 -> 10.0.10.2:445")
+  (dict "t" "Security EID=4720 TargetUserName=soporte2 SubjectUserName=administrador")
+  (dict "t" "dns: query A update-cdn.example.net from 10.0.30.21 NXDOMAIN")
+  (dict "t" "Security EID=4625 TargetUserName=jperez Status=0xC000006D SrcIp=10.0.30.21")
+  (dict "t" "ALERTA T1136.001 cuenta local creada fuera de horario · DC-01" "hit" true)
+  (dict "t" "wazuh: agent WS-01 connected · rules loaded 4312")
+  (dict "t" "cloudtrail: ConsoleLogin Success user=dev-readonly mfa=false src=198.51.100.77")
+-}}
+<div class="hero-logs" aria-hidden="true">
+  <div class="hero-logs-track">
+    {{ range seq 2 }}{{ range $i, $l := $lines }}<p{{ if $l.hit }} class="hit"{{ end }}>{{ printf "12:%02d:%02d" (add 4 $i) (mod (mul $i 37) 60) }} {{ $l.t }}</p>{{ end }}{{ end }}
+  </div>
+</div>

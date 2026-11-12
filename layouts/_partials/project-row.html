@@ -1,0 +1,5 @@
+<li>
+  <a class="name" href="{{ .RelPermalink }}">{{ .Title }}</a>
+  <span class="what">{{ .Params.summary | default .Summary | plainify }}{{ with .Params.stack }}<span class="tools">{{ delimit . ", " }}</span>{{ end }}</span>
+  <span class="status{{ if eq .Params.estado "Terminado" }} done{{ end }}">{{ .Params.estado | default "En progreso" }}</span>
+</li>

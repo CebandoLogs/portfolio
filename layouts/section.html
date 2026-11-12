@@ -1,12 +1,12 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
-{{ with .Content }}<div class="prose lead">{{ . }}</div>{{ end }}
+<header class="post-head"><h1>{{ .Title }}</h1></header>
+{{ with .Content }}<div class="intro-list">{{ . }}</div>{{ end }}
 {{ if eq .Section "proyectos" }}
-  <div class="cards">{{ range .Pages }}{{ partial "project-card.html" . }}{{ end }}</div>
+  <ul class="ledger">{{ range .Pages }}{{ partial "project-row.html" . }}{{ end }}</ul>
 {{ else }}
   {{ range .Pages.GroupByDate "2006" }}
     <h2 class="year">{{ .Key }}</h2>
-    <ul class="rows">{{ range .Pages }}{{ partial "post-row.html" . }}{{ end }}</ul>
+    <ul class="ledger posts">{{ range .Pages }}{{ partial "post-row.html" . }}{{ end }}</ul>
   {{ end }}
 {{ end }}
 {{ end }}

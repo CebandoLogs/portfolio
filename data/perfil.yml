@@ -1,12 +1,13 @@
 nombre: Cebando Logs
-rol: Blue Team · SOC e Incident Response
+rol: Seguridad defensiva
+lema: Seguridad defensiva, de a un log por vez.
 bio: >-
   Vengo del análisis de producto y estoy pasando a seguridad defensiva.
   Monto mi propio lab, simulo ataques, escribo las detecciones y documento
   cada investigación. Un mate y a leer logs.
-ahora: Fase 1 · Redes, Linux y armado del home lab
+ahora: redes, Linux y el armado del home lab
 disponible: true
-disponible_texto: Abierto a oportunidades como SOC / Incident Response Analyst
+disponible_texto: Busco mi primer puesto como analista SOC o de respuesta a incidentes.
 github: ""
 linkedin: ""
 x: ""

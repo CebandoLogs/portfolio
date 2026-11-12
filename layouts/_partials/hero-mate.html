@@ -1,0 +1,37 @@
+<svg class="hero-mate" viewBox="0 0 240 300" role="img" aria-label="Un mate de madera con virola de metal al que le caen líneas de log">
+  <defs>
+    <linearGradient id="g-metal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8c959b"/><stop offset="0.18" stop-color="#eef1f3"/><stop offset="0.45" stop-color="#b9c1c6"/><stop offset="0.72" stop-color="#f7f9fa"/><stop offset="1" stop-color="#7d868c"/>
+    </linearGradient>
+    <linearGradient id="g-wood" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6b3a18"/><stop offset="0.3" stop-color="#b9763a"/><stop offset="0.55" stop-color="#c98a4a"/><stop offset="0.8" stop-color="#96592a"/><stop offset="1" stop-color="#5c3013"/>
+    </linearGradient>
+    <linearGradient id="g-straw" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f6f7"/><stop offset="0.5" stop-color="#aab3b8"/><stop offset="1" stop-color="#e6eaec"/>
+    </linearGradient>
+  </defs>
+  <ellipse class="m-shadow" cx="120" cy="284" rx="62" ry="6"/>
+  <g class="pour">
+    <rect class="drop d1" x="92" y="0" width="34" height="5" rx="2.5"/>
+    <rect class="drop d2" x="104" y="0" width="22" height="5" rx="2.5"/>
+    <rect class="drop d3" x="88" y="0" width="44" height="5" rx="2.5"/>
+    <rect class="drop d4" x="98" y="0" width="16" height="5" rx="2.5"/>
+    <rect class="drop d5" x="94" y="0" width="30" height="5" rx="2.5"/>
+    <rect class="drop d6" x="106" y="0" width="24" height="5" rx="2.5"/>
+  </g>
+  <!-- cuerpo de madera -->
+  <path fill="url(#g-wood)" d="M60 164Q120 180 180 164C194 200 188 236 162 256C159 263 163 270 168 277H72C77 270 81 263 78 256C52 236 46 200 60 164Z"/>
+  <path class="m-grain" d="M92 182c-10 24-6 50 8 70M128 180c8 26 4 56-10 78M156 182c8 20 6 44-6 62M108 262c10 4 22 4 32 0"/>
+  <ellipse class="m-base" cx="120" cy="277" rx="48" ry="5"/>
+  <!-- virola con guarda pampa -->
+  <path fill="url(#g-metal)" d="M57 128L60 164Q120 181 180 164L183 128Z"/>
+  <path class="m-engrave" d="M59 137Q120 152 181 137M60 160Q120 176 180 160"/>
+  <path class="m-engrave" d="M76 142l8 8-8 8-8-8zM98 146l8 8-8 8-8-8zM120 147l8 8-8 8-8-8zM142 146l8 8-8 8-8-8zM164 142l8 8-8 8-8-8z"/>
+  <path class="m-engrave-fill" d="M76 147l3 3-3 3-3-3zM98 151l3 3-3 3-3-3zM120 152l3 3-3 3-3-3zM142 151l3 3-3 3-3-3zM164 147l3 3-3 3-3-3zM87 150l2 2-2 2-2-2zM109 153l2 2-2 2-2-2zM131 153l2 2-2 2-2-2zM153 150l2 2-2 2-2-2z"/>
+  <!-- boca, yerba y bombilla -->
+  <ellipse fill="url(#g-metal)" cx="120" cy="128" rx="65" ry="13"/>
+  <ellipse class="m-mouth" cx="120" cy="128" rx="54" ry="9"/>
+  <ellipse class="m-yerba" cx="112" cy="130" rx="42" ry="6"/>
+  <path class="m-bombilla" stroke="url(#g-straw)" d="M150 129L178 64Q186 44 206 35L233 23"/>
+  <path class="m-ring" d="M165 84l12 5M169 75l12 5"/>
+</svg>

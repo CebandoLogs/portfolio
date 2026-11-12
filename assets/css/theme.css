@@ -1,6 +1,6 @@
 {{- $a := hugo.Data.apariencia -}}
-{{- $claro := $a.acento_claro | default "#2c6e49" -}}
-{{- $oscuro := $a.acento_oscuro | default "#86d39a" -}}
+{{- $claro := $a.acento_claro | default "#8f5226" -}}
+{{- $oscuro := $a.acento_oscuro | default "#d29b62" -}}
 {{- $fuentes := dict "sans" "var(--sans)" "mono" "var(--mono)" "serif" "var(--serif)" -}}
 :root { --accent: {{ $claro | safeCSS }}; --heading: {{ index $fuentes ($a.titulos | default "sans") | safeCSS }}; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --accent: {{ $oscuro | safeCSS }}; } }

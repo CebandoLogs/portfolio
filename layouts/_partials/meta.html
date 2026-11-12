@@ -1,5 +1,3 @@
-<div class="meta">
-  <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time>
-  {{ if eq .Section "posts" }}<span>· {{ .ReadingTime }} min de lectura</span>{{ end }}
-  {{ with .Params.estado }}<span class="state{{ if eq . "Terminado" }} done{{ end }}">{{ . }}</span>{{ end }}
-</div>
+<p class="meta">
+  <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time>{{ if eq .Section "posts" }}, {{ .ReadingTime }} min de lectura{{ end }}{{ with .Params.estado }}. {{ . }}.{{ end }}
+</p>

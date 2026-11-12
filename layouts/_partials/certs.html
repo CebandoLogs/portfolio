@@ -1,10 +1,10 @@
 {{ with hugo.Data.certificaciones.certificaciones }}
-<ul class="certs">
+<ul class="ledger">
   {{ range . }}
   <li>
-    <div><strong>{{ .nombre }}</strong><span class="muted">{{ .emisor }}{{ with .fecha }} · {{ . }}{{ end }}</span></div>
-    <span class="state{{ if eq .estado "Obtenida" }} done{{ else if eq .estado "Planificada" }} idle{{ end }}">{{ .estado }}</span>
-    {{ with .verificacion }}<a href="{{ . }}" rel="noopener">Verificar →</a>{{ end }}
+    <span class="name">{{ .nombre }}</span>
+    <span class="what">{{ .emisor }}{{ with .verificacion }}, <a href="{{ . }}" rel="noopener">verificar credencial</a>{{ end }}</span>
+    <span class="status{{ if eq .estado "Obtenida" }} done{{ end }}">{{ .estado }}{{ with .fecha }}, {{ . }}{{ end }}</span>
   </li>
   {{ end }}
 </ul>

@@ -72,9 +72,10 @@ collections:
         file: data/perfil.yml
         fields:
           - { name: nombre, label: Nombre, widget: string }
-          - { name: rol, label: Rol, widget: string }
+          - { name: rol, label: Rol (título de la pestaña), widget: string }
+          - { name: lema, label: Lema de la portada, widget: string, required: false }
           - { name: bio, label: Presentación, widget: text }
-          - { name: ahora, label: Qué estás estudiando ahora, widget: string, required: false }
+          - { name: ahora, label: Qué estás estudiando ahora, widget: string, required: false, hint: "Completa la frase: Ahora estudio..." }
           - { name: disponible, label: Mostrar que buscás trabajo, widget: boolean, default: true }
           - { name: disponible_texto, label: Texto de disponibilidad, widget: string, required: false }
           - { name: github, label: Link de GitHub, widget: string, required: false }

@@ -1,29 +1,28 @@
 {{ define "main" }}
 <article>
   <header class="post-head">
-    {{ if eq .Section "posts" }}<a class="back" href="{{ "posts/" | relURL }}">← Blog</a>{{ else if eq .Section "proyectos" }}<a class="back" href="{{ "proyectos/" | relURL }}">← Proyectos</a>{{ end }}
+    {{ if eq .Section "posts" }}<a class="back" href="{{ "posts/" | relURL }}">Volver al blog</a>{{ else if eq .Section "proyectos" }}<a class="back" href="{{ "proyectos/" | relURL }}">Volver a proyectos</a>{{ end }}
     <h1>{{ .Title }}</h1>
     {{ if or (eq .Section "posts") (eq .Section "proyectos") }}{{ partial "meta.html" . }}{{ end }}
     {{ with .Params.mitre }}
-      <p class="mitre"><span class="label">MITRE ATT&amp;CK</span>
-      {{ range . }}{{ $path := replace . "." "/" }}<a class="chip" href="https://attack.mitre.org/techniques/{{ $path }}/" rel="noopener">{{ . }}</a>{{ end }}</p>
+      <p class="facts">Técnicas de MITRE ATT&amp;CK: {{ range $i, $t := . }}{{ if $i }}, {{ end }}<a href="https://attack.mitre.org/techniques/{{ replace $t "." "/" }}/" rel="noopener">{{ $t }}</a>{{ end }}</p>
     {{ end }}
-    {{ with .Params.stack }}<p class="stack">{{ range . }}<span>{{ . }}</span>{{ end }}</p>{{ end }}
-    {{ with .Params.repo }}<p><a class="btn" href="{{ . }}" rel="noopener">Ver repositorio →</a></p>{{ end }}
+    {{ with .Params.stack }}<p class="facts">Hecho con {{ delimit . ", " " y " }}.</p>{{ end }}
+    {{ with .Params.repo }}<p><a href="{{ . }}" rel="noopener">Ver el repositorio</a></p>{{ end }}
   </header>
   {{ if and (gt .WordCount 600) (ne .TableOfContents "<nav id=\"TableOfContents\"></nav>") }}
     <details class="toc"><summary>Contenido</summary>{{ .TableOfContents }}</details>
   {{ end }}
   <div class="prose">{{ .Content }}</div>
   {{ if eq .RelPermalink "/sobre-mi/" }}
-    {{ if hugo.Data.certificaciones.certificaciones }}<section class="block after"><h2>Certificaciones</h2>{{ partial "certs.html" . }}</section>{{ end }}
-    <section class="block after"><h2>Contacto</h2><p class="social big">{{ partial "social.html" . }}</p></section>
+    {{ if hugo.Data.certificaciones.certificaciones }}<section class="after"><h2>Certificaciones</h2>{{ partial "certs.html" . }}</section>{{ end }}
+    {{ $p := hugo.Data.perfil }}{{ if or $p.github $p.linkedin $p.x $p.email }}<section class="after"><h2>Contacto</h2><p class="social">{{ partial "social.html" . }}</p></section>{{ end }}
   {{ end }}
-  {{ with .Params.tags }}<p class="tags post-tags">{{ range . }}<a href="{{ (printf "tags/%s/" (urlize .)) | relURL }}">#{{ . }}</a>{{ end }}</p>{{ end }}
-  {{ if eq .Section "posts" }}
+  {{ with .Params.tags }}<p class="post-tags">{{ range . }}<a href="{{ (printf "tags/%s/" (urlize .)) | relURL }}">#{{ . }}</a>{{ end }}</p>{{ end }}
+  {{ if and (eq .Section "posts") (or .NextInSection .PrevInSection) }}
   <nav class="pager" aria-label="Otros posts">
-    {{ with .NextInSection }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ else }}<span></span>{{ end }}
-    {{ with .PrevInSection }}<a href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end }}
+    {{ with .PrevInSection }}<a href="{{ .RelPermalink }}"><span>Anterior</span>{{ .Title }}</a>{{ end }}
+    {{ with .NextInSection }}<a href="{{ .RelPermalink }}"><span>Siguiente</span>{{ .Title }}</a>{{ end }}
   </nav>
   {{ end }}
 </article>
