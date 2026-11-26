@@ -1,7 +1,7 @@
 <footer class="site-footer">
   <div class="wrap"><hr class="guarda"></div>
   <div class="wrap bar">
-    <span>{{ hugo.Data.perfil.nombre }}, {{ now.Year }}</span>
+    <span>{{ hugo.Data.perfil.nombre }}, {{ now.Year }} · sin trackers ni cookies</span>
     <span class="links">
       {{ partial "social.html" . }}
       {{ with site.Home.OutputFormats.Get "rss" }}<a href="{{ .RelPermalink }}">RSS</a>{{ end }}

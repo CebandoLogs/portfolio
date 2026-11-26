@@ -14,6 +14,7 @@ data/certificaciones.yml, data/stack.yml
 static/admin/         ← panel de administración (Sveltia CMS)
 static/_headers       ← cabeceras de seguridad (las aplica Cloudflare)
 layouts/ assets/      ← diseño
+assets/js/mate.js     ← el mate en ASCII de la portada (ray marching sobre un canvas)
 ```
 
 Todo lo de `content/` y `data/` se edita desde el panel. No hace falta tocar archivos a mano.

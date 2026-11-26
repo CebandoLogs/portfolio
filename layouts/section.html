@@ -1,12 +1,12 @@
 {{ define "main" }}
-<header class="post-head"><h1>{{ .Title }}</h1></header>
+<header class="post-head"><p class="kicker">{{ if eq .Section "proyectos" }}Portfolio{{ else }}Bitácora{{ end }} · {{ printf "%02d" (len .Pages) }} entradas</p><h1>{{ .Title }}</h1></header>
 {{ with .Content }}<div class="intro-list">{{ . }}</div>{{ end }}
 {{ if eq .Section "proyectos" }}
-  <ul class="ledger">{{ range .Pages }}{{ partial "project-row.html" . }}{{ end }}</ul>
+  <div class="cards">{{ range .Pages }}{{ partial "project-row.html" . }}{{ end }}</div>
 {{ else }}
   {{ range .Pages.GroupByDate "2006" }}
     <h2 class="year">{{ .Key }}</h2>
-    <ul class="ledger posts">{{ range .Pages }}{{ partial "post-row.html" . }}{{ end }}</ul>
+    <ul class="feed">{{ range .Pages }}{{ partial "post-row.html" . }}{{ end }}</ul>
   {{ end }}
 {{ end }}
 {{ end }}

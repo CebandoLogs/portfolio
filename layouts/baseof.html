@@ -27,6 +27,9 @@
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
   {{- $js := resources.Get "js/theme.js" | minify | fingerprint "sha384" }}
   <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+  {{- if .IsHome }}{{ $mate := resources.Get "js/mate.js" | minify | fingerprint "sha384" }}
+  <script src="{{ $mate.RelPermalink }}" integrity="{{ $mate.Data.Integrity }}" defer></script>
+  {{- end }}
 </head>
 <body>
   <a class="skip" href="#contenido">Saltar al contenido</a>

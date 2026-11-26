@@ -1,4 +1,5 @@
 {{ define "main" }}
-<header class="post-head"><h1>#{{ .Title }}</h1></header>
-<ul class="ledger posts">{{ range .Pages }}{{ partial "post-row.html" . }}{{ end }}</ul>
+<header class="post-head"><p class="kicker">Etiqueta</p><h1>#{{ .Title }}</h1></header>
+<ul class="feed">{{ range .Pages }}{{ if eq .Section "posts" }}{{ partial "post-row.html" . }}{{ end }}{{ end }}</ul>
+{{ with where .Pages "Section" "proyectos" }}<div class="cards">{{ range . }}{{ partial "project-row.html" . }}{{ end }}</div>{{ end }}
 {{ end }}

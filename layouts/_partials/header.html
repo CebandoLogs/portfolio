@@ -1,10 +1,10 @@
 <header class="site-header">
   <div class="wrap bar">
-    <a class="brand" href="{{ "/" | relURL }}">{{ partial "mate.html" . }}<span>{{ site.Title }}</span></a>
+    <a class="brand" href="{{ "/" | relURL }}">{{ partial "mate.html" . }}<span>{{ replace (lower site.Title) " " "/" }}</span></a>
     <nav aria-label="Principal">
       {{ $current := . }}
-      {{ range site.Menus.main }}
-        <a href="{{ .URL }}"{{ if or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }} aria-current="page"{{ end }}>{{ .Name }}</a>
+      {{ range $i, $m := site.Menus.main }}
+        <a href="{{ .URL }}"{{ if or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }} aria-current="page"{{ end }}><span class="idx" aria-hidden="true">{{ printf "%02d" (add $i 1) }}</span>{{ .Name }}</a>
       {{ end }}
       <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Cambiar entre tema claro y oscuro" hidden>
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg>
