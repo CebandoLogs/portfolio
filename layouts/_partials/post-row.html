@@ -1,4 +1,10 @@
+{{- $n := 0 -}}
+{{- range $i, $q := (where site.RegularPages "Section" "posts").ByDate }}{{ if eq $q $ }}{{ $n = add $i 1 }}{{ end }}{{ end -}}
 <li>
-  <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format "2 Jan 2006" }}</time>
-  <span class="what"><a class="name" href="{{ .RelPermalink }}">{{ .Title }}</a>{{ with .Params.tags }}<span class="tags">{{ range $i, $t := first 4 . }}{{ if $i }}, {{ end }}{{ $t }}{{ end }}</span>{{ end }}</span>
+  <p class="feed-meta"><span class="num">Mate Nº {{ printf "%03d" $n }}</span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format "2 Jan 2006" }}</time><span>{{ .ReadingTime }} min</span></p>
+  <div class="feed-body">
+    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    {{ with .Params.summary }}<p class="what">{{ . }}</p>{{ end }}
+    {{ with .Params.tags }}<p class="tags">{{ range first 4 . }}<span>#{{ . }}</span>{{ end }}</p>{{ end }}
+  </div>
 </li>

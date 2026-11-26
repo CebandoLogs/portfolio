@@ -1,3 +1,5 @@
+{{- $n := 0 -}}
+{{- if eq .Section "posts" }}{{ range $i, $q := (where site.RegularPages "Section" "posts").ByDate }}{{ if eq $q $ }}{{ $n = add $i 1 }}{{ end }}{{ end }}{{ end -}}
 <p class="meta">
-  <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time>{{ if eq .Section "posts" }}, {{ .ReadingTime }} min de lectura{{ end }}{{ with .Params.estado }}. {{ . }}.{{ end }}
+  {{ if $n }}<span class="num">Mate Nº {{ printf "%03d" $n }}</span>{{ end }}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time>{{ if eq .Section "posts" }}<span>{{ .ReadingTime }} min de lectura</span>{{ end }}{{ with .Params.estado }}<span class="status{{ if eq . "Terminado" }} done{{ end }}">{{ . }}</span>{{ end }}
 </p>

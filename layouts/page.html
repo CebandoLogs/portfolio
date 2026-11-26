@@ -1,7 +1,7 @@
 {{ define "main" }}
 <article>
   <header class="post-head">
-    {{ if eq .Section "posts" }}<a class="back" href="{{ "posts/" | relURL }}">Volver al blog</a>{{ else if eq .Section "proyectos" }}<a class="back" href="{{ "proyectos/" | relURL }}">Volver a proyectos</a>{{ end }}
+    {{ if eq .Section "posts" }}<a class="back" href="{{ "posts/" | relURL }}">&lt;- blog</a>{{ else if eq .Section "proyectos" }}<a class="back" href="{{ "proyectos/" | relURL }}">&lt;- proyectos</a>{{ end }}
     <h1>{{ .Title }}</h1>
     {{ if or (eq .Section "posts") (eq .Section "proyectos") }}{{ partial "meta.html" . }}{{ end }}
     {{ with .Params.mitre }}

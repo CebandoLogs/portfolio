@@ -1,55 +1,77 @@
 {{ define "main" }}
 {{ $p := hugo.Data.perfil }}
+{{ $posts := where site.RegularPages "Section" "posts" }}
+{{ $proyectos := where site.RegularPages "Section" "proyectos" }}
 <section class="hero">
+  <div class="hero-stage" data-mate>
+    {{ partial "hero-logs.html" . }}
+    <canvas role="img" aria-label="Un mate con bombilla dibujado con caracteres, girando, al que le caen líneas de log por la boca"></canvas>
+    {{ partial "hero-mate.html" . }}
+  </div>
   <div class="hero-text">
-    <h1>{{ range split $p.nombre " " }}<span>{{ . }}</span>{{ end }}</h1>
+    <p class="kicker">{{ $p.rol }}{{ if $p.disponible }} <span class="live">disponible</span>{{ end }}</p>
+    <h1>{{ range $i, $w := split $p.nombre " " }}<span{{ if $i }} class="alt"{{ end }}>{{ $w }}</span>{{ end }}</h1>
     {{ with $p.lema }}<p class="lema">{{ . }}</p>{{ end }}
-    <p class="bio">{{ $p.bio }}{{ with $p.ahora }} Ahora estudio {{ . }}.{{ end }}</p>
-    {{ if $p.disponible }}{{ with $p.disponible_texto }}<p class="avail">{{ . }}</p>{{ end }}{{ end }}
     <p class="cta">
       <a class="btn" href="{{ "proyectos/" | relURL }}">Ver proyectos</a>
-      <a href="{{ "posts/" | relURL }}">Leer el blog</a>
+      <a class="btn ghost" href="{{ "posts/" | relURL }}">Leer el blog</a>
+      <a class="scroll-hint" href="#perfil"><span aria-hidden="true">↓</span> perfil</a>
       <span class="social">{{ partial "social.html" . }}</span>
     </p>
   </div>
-  <div class="hero-stage">
-    {{ partial "hero-logs.html" . }}
-    {{ partial "hero-mate.html" . }}
-  </div>
+  <p class="hud" aria-hidden="true"><span class="hud-log" data-mate-log>cebando logs</span><span data-mate-stat>mate en ascii</span></p>
 </section>
-<hr class="guarda">
 
-{{ $proyectos := where site.RegularPages "Section" "proyectos" }}
+<section class="block intro" id="perfil">
+  <div class="block-head"><span class="idx">00</span><h2>Perfil</h2></div>
+  <p class="bio">{{ $p.bio }}</p>
+  {{ if $p.disponible }}{{ with $p.disponible_texto }}<p class="avail">{{ . }}</p>{{ end }}{{ end }}
+  <dl class="stats">
+  <div><dt>Proyectos</dt><dd>{{ printf "%02d" (len $proyectos) }}</dd></div>
+  <div><dt>Posts</dt><dd>{{ printf "%02d" (len $posts) }}</dd></div>
+  {{ with $p.ahora }}<div class="wide"><dt>Ahora</dt><dd>{{ . }}</dd></div>{{ end }}
+</dl>
+</section>
+
 {{ $destacados := where $proyectos "Params.destacado" true }}
 {{ with (cond (gt (len $destacados) 0) $destacados $proyectos) }}
 <section class="block">
-  <div class="block-head"><h2>Proyectos</h2><a href="{{ "proyectos/" | relURL }}">Todos los proyectos</a></div>
-  <ul class="ledger">{{ range first 4 . }}{{ partial "project-row.html" . }}{{ end }}</ul>
+  <div class="block-head"><span class="idx">01</span><h2>Proyectos</h2><a href="{{ "proyectos/" | relURL }}">todos -&gt;</a></div>
+  <div class="cards">{{ range first 4 . }}{{ partial "project-row.html" . }}{{ end }}</div>
 </section>
 {{ end }}
 
+<section class="block">
+  <div class="block-head"><span class="idx">02</span><h2>Blog</h2><a href="{{ "posts/" | relURL }}">todos -&gt;</a></div>
+  {{ with $posts }}
+    <ul class="feed">{{ range first 5 . }}{{ partial "post-row.html" . }}{{ end }}</ul>
+  {{ else }}
+    <p class="muted">Todavía no hay posts publicados.</p>
+  {{ end }}
+</section>
+
 {{ with hugo.Data.stack.grupos }}
 <section class="block">
-  <div class="block-head"><h2>Con qué trabajo</h2></div>
+  <div class="block-head"><span class="idx">03</span><h2>Con qué trabajo</h2></div>
   <dl class="areas">
-    {{ range . }}<div><dt>{{ .nombre }}</dt><dd>{{ delimit .items ", " }}</dd></div>{{ end }}
+    {{ range . }}<div><dt>{{ .nombre }}</dt><dd>{{ range .items }}<span class="chip">{{ . }}</span>{{ end }}</dd></div>{{ end }}
   </dl>
 </section>
 {{ end }}
 
 {{ if hugo.Data.certificaciones.certificaciones }}
 <section class="block">
-  <div class="block-head"><h2>Certificaciones</h2></div>
+  <div class="block-head"><span class="idx">04</span><h2>Certificaciones</h2></div>
   {{ partial "certs.html" . }}
 </section>
 {{ end }}
 
-<section class="block">
-  <div class="block-head"><h2>Últimos posts</h2><a href="{{ "posts/" | relURL }}">Todos los posts</a></div>
-  {{ with where site.RegularPages "Section" "posts" }}
-    <ul class="ledger posts">{{ range first 5 . }}{{ partial "post-row.html" . }}{{ end }}</ul>
-  {{ else }}
-    <p class="muted">Todavía no hay posts publicados.</p>
-  {{ end }}
+{{ if $p.disponible }}
+<section class="block contact">
+  <p class="kicker">Contacto</p>
+  <h2>¿Unos mates y hablamos?</h2>
+  {{ with $p.disponible_texto }}<p>{{ . }}</p>{{ end }}
+  <p class="cta"><a class="btn" href="{{ "sobre-mi/" | relURL }}">Sobre mí</a><span class="social">{{ partial "social.html" . }}</span></p>
 </section>
+{{ end }}
 {{ end }}

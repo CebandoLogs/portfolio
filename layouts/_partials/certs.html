@@ -1,10 +1,11 @@
 {{ with hugo.Data.certificaciones.certificaciones }}
 <ul class="ledger">
   {{ range . }}
+  {{ $bar := "[..........]" }}{{ if eq .estado "Obtenida" }}{{ $bar = "[##########]" }}{{ else if eq .estado "En curso" }}{{ $bar = "[#####.....]" }}{{ end }}
   <li>
     <span class="name">{{ .nombre }}</span>
     <span class="what">{{ .emisor }}{{ with .verificacion }}, <a href="{{ . }}" rel="noopener">verificar credencial</a>{{ end }}</span>
-    <span class="status{{ if eq .estado "Obtenida" }} done{{ end }}">{{ .estado }}{{ with .fecha }}, {{ . }}{{ end }}</span>
+    <span class="status{{ if eq .estado "Obtenida" }} done{{ end }}"><span class="bar" aria-hidden="true">{{ $bar }}</span> {{ .estado }}{{ with .fecha }}, {{ . }}{{ end }}</span>
   </li>
   {{ end }}
 </ul>

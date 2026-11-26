@@ -1,5 +1,8 @@
-<li>
-  <a class="name" href="{{ .RelPermalink }}">{{ .Title }}</a>
-  <span class="what">{{ .Params.summary | default .Summary | plainify }}{{ with .Params.stack }}<span class="tools">{{ delimit . ", " }}</span>{{ end }}</span>
-  <span class="status{{ if eq .Params.estado "Terminado" }} done{{ end }}">{{ .Params.estado | default "En progreso" }}</span>
-</li>
+{{- $n := 0 -}}
+{{- range $i, $q := (where site.RegularPages "Section" "proyectos").ByDate }}{{ if eq $q $ }}{{ $n = add $i 1 }}{{ end }}{{ end -}}
+<article class="card">
+  <p class="card-top"><span>PRJ-{{ printf "%02d" $n }}</span><span class="status{{ if eq .Params.estado "Terminado" }} done{{ end }}">{{ .Params.estado | default "En progreso" }}</span></p>
+  <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+  <p class="what">{{ .Params.summary | default .Summary | plainify }}</p>
+  {{ with .Params.stack }}<p class="chips">{{ range . }}<span class="chip">{{ . }}</span>{{ end }}</p>{{ end }}
+</article>
