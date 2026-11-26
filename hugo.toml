@@ -2,7 +2,7 @@
 # Lo único que hay que tocar acá es baseURL (la dirección final del sitio).
 # Todo lo demás (perfil, links, colores, certificaciones) se edita desde
 # el panel /admin o en los archivos de la carpeta data/.
-baseURL = "https://cebandologs.pages.dev/"
+baseURL = "https://portfolio.cebandologs.workers.dev/"
 locale = "es-AR"
 defaultContentLanguage = "es"
 title = "Cebando Logs"
